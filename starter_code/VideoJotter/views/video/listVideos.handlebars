@@ -1,0 +1,75 @@
+<div class="container">
+	{{#if videos}}
+	<div class="card card-body">
+		<h3 class="text-primary">Video Jots</h3>
+		{{#each videos}}
+		<div class="card border-primary mb-2 w-100 mx-auto">
+			<div class="card-header">
+				<h5 class="card-title">{{title}}</h5>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-3">
+						<p class="font-italic">Subtitles</p>
+						<p class="text-info">
+							Subtitles
+						</p>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-3">
+						<p class="font-italic">Language</p>
+						<p class="text-info">
+							Language
+						</p>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<p class="font-italic">Classification</p>
+						<p class="text-info">Classification</p>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<p class="font-italic">Date of Release</p>
+						<p class="text-info">Date of Release</p>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<p>
+							<a href="" class="card-link mb-2">
+								<i class="fas fa-pencil-alt"></i>
+								Edit
+							</a>
+						</p>
+						<p>
+							<a href="" class="card-link" data-toggle="confirmation" data-title="Confirm delete?">
+								<i class="far fa-trash-alt"></i>
+								Delete
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion" id="storyAccordion">
+				<div class="card-header" id="headingOne">
+					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne{{id}}"
+						aria-expanded="false" aria-controls="collapseOne{{id}}" style="text-decoration: none;">
+						Story <i class="fas fa-chevron-down"></i>
+					</button>
+				</div>
+				<div id="collapseOne{{id}}" class="collapse" aria-labelledby="headingOne" data-parent="#storyAccordion">
+					<div class="card-body">
+						Story
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+
+</div>
+{{else}}
+<h3>No videos jotted</h3>
+{{/if}}
+
+<script>
+	$('[data-toggle=confirmation]').confirmation({
+		rootSelector: '[data-toggle=confirmation]',
+	});
+</script>
