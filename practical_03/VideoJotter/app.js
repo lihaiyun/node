@@ -45,26 +45,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Enables session to be stored using browser's Cookie ID
 app.use(cookieParser());
 
-// Library to use MySQL to store session objects 
-const MySQLStore = require('express-mysql-session');
-var options = {
-	host: process.env.DB_HOST,
-	port: process.env.DB_PORT,
-	user: process.env.DB_USER,
-	password: process.env.DB_PWD,
-	database: process.env.DB_NAME,
-	clearExpired: true,
-	// The maximum age of a valid session; milliseconds: 
+// Library to use Sequelize to store session objects 
+const SessionStore = require('express-session-sequelize')(session.Store);
+const myDatabase = require('./config/DBConfig');
+const sequelizeSessionStore = new SessionStore({
+	// Valid Sequelize instance **required
+    db: myDatabase,
+	// How long until inactive sessions expire in milliseconds. (Default: 24 hours)
 	expiration: 3600000, // 1 hour = 60x60x1000 milliseconds
-	// How frequently expired sessions will be cleared; milliseconds: 
-	checkExpirationInterval: 1800000 // 30 min
-};
+	// How often expired sessions are purged in milliseconds.  (Default: 15 minutes)
+	checkExpirationInterval: 900000 // 15 min
+});
 
 // To store session information. By default it is stored as a cookie on browser
 app.use(session({
 	key: 'vidjot_session',
 	secret: 'tojdiv',
-	store: new MySQLStore(options),
+	store: sequelizeSessionStore,
 	resave: false,
 	saveUninitialized: false,
 }));
