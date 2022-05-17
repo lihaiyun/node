@@ -9,6 +9,7 @@ const Handlebars = require('handlebars');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
+require('dotenv').config();
 
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
