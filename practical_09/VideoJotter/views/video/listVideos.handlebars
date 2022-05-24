@@ -79,11 +79,10 @@
 		</div>
 		{{/each}}
 	</div>
-
+	{{else}}
+	<h3>No videos jotted</h3>
+	{{/if}}
 </div>
-{{else}}
-<h3>No videos jotted</h3>
-{{/if}}
 
 <script>
 	$('[data-toggle=confirmation]').confirmation({
