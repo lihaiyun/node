@@ -19,7 +19,7 @@
     "flash-messenger": "^1.1.1",
     "handlebars": "^4.7.7",
     "moment": "^2.29.1",
-    "multer": "^1.4.4",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",
     "node-fetch": "^2.6.7",
     "passport": "^0.5.2",
