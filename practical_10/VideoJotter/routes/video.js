@@ -10,6 +10,9 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const upload = require('../helpers/imageUpload');
 
+// Learning Sequelize include option for JOIN query
+// https://sebhastian.com/sequelize-include/
+
 router.get('/listVideos', ensureAuthenticated, (req, res) => {
     Video.findAll({
         where: { userId: req.user.id },
