@@ -132,7 +132,10 @@ router.post('/upload', ensureAuthenticated, (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             // e.g. File too large
-            res.json({ file: '/img/no-image.jpg', err: err });
+            res.json({ err: err });
+        }
+        else if (req.file == undefined) {
+            res.json({});
         }
         else {
             res.json({ file: `/uploads/${req.user.id}/${req.file.filename}` });

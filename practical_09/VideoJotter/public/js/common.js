@@ -68,13 +68,15 @@ $('#posterUpload').on('change', function () {
     })
         .then(res => res.json())
         .then((data) => {
-            $('#poster').attr('src', data.file);
-            $('#posterURL').attr('value', data.file); // sets posterURL hidden field
             if (data.err) {
-                $('#posterErr').show();
                 $('#posterErr').text(data.err.message);
+                $('#posterErr').show();
             }
             else {
+                if (data.file) {
+                    $('#poster').attr('src', data.file);
+                    $('#posterURL').attr('value', data.file); // sets posterURL hidden field    
+                }
                 $('#posterErr').hide();
             }
         })
