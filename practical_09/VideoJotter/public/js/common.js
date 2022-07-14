@@ -75,7 +75,7 @@ $('#posterUpload').on('change', function () {
             else {
                 if (data.file) {
                     $('#poster').attr('src', data.file);
-                    $('#posterURL').attr('value', data.file); // sets posterURL hidden field    
+                    $('#posterURL').attr('value', data.file); // set hidden field 
                 }
                 $('#posterErr').hide();
             }
