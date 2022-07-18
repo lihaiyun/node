@@ -1,1 +1,1 @@
-# Full Stack Development using Node.js and Sequlize
+# Full Stack Development using Node.js and Sequelize
