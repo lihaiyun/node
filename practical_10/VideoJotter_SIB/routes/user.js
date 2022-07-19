@@ -7,20 +7,29 @@ const passport = require('passport');
 // Required for email verification
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const sgMail = require('@sendgrid/mail');
 
-function sendEmail(toEmail, url) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const message = {
-        to: toEmail,
-        from: `Video Jotter <${process.env.SENDGRID_SENDER_EMAIL}>`,
-        subject: 'Verify Video Jotter Account',
-        html: `Thank you registering with Video Jotter.<br><br> Please <a href=\"${url}"><strong>verify</strong></a> your account.`
+// https://developers.sendinblue.com/reference/sendtransacemail
+function sendEmail(subject, htmlContent, toEmail) {
+    const SibApiV3Sdk = require('sib-api-v3-sdk');
+    let defaultClient = SibApiV3Sdk.ApiClient.instance;
+
+    let apiKey = defaultClient.authentications['api-key'];
+    apiKey.apiKey = process.env.SIB_API_KEY;
+
+    let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+    let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+    sendSmtpEmail.subject = subject;
+    sendSmtpEmail.htmlContent = htmlContent;
+    sendSmtpEmail.sender = {
+        name: "Video Jotter",
+        email: process.env.SIB_SENDER_EMAIL
     };
+    sendSmtpEmail.to = [{ email: toEmail }];
 
-    // Returns the promise from SendGrid to the calling function
+    // Returns the promise from SendInBlue to the calling function
     return new Promise((resolve, reject) => {
-        sgMail.send(message)
+        apiInstance.sendTransacEmail(sendSmtpEmail)
             .then(response => resolve(response))
             .catch(err => reject(err));
     });
@@ -72,7 +81,9 @@ router.post('/register', async function (req, res) {
             // Send email
             let token = jwt.sign(email, process.env.APP_SECRET);
             let url = `${process.env.BASE_URL}:${process.env.PORT}/user/verify/${user.id}/${token}`;
-            sendEmail(user.email, url)
+            let subject = 'Verify Video Jotter Account';
+            let htmlContent = `Thank you registering with Video Jotter.<br><br> Please <a href=\"${url}"><strong>verify</strong></a> your account.`;
+            sendEmail(subject, htmlContent, user.email)
                 .then(response => {
                     console.log(response);
                     flashMessage(res, 'success', user.email + ' registered successfully');
@@ -142,10 +153,10 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/logout', (req, res, next) => {
-    req.logout(function(err) {
+    req.logout(function (err) {
         if (err) { return next(err); }
         res.redirect('/');
-      });
+    });
 });
 
 module.exports = router;
