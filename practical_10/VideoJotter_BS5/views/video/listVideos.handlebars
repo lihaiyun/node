@@ -1,9 +1,9 @@
 <div class="container">
+	<h3 class="mb-3">Video Jots</h3>
 	{{#if videos}}
-	<div class="card card-body">
-		<h3 class="text-primary">Video Jots</h3>
+	<div>
 		{{#each videos}}
-		<div class="card border-primary mb-2 w-100 mx-auto">
+		<div class="card mb-2 w-100 mx-auto">
 			<div class="card-header">
 				<h5 class="card-title">{{title}}</h5>
 			</div>
@@ -46,33 +46,27 @@
 						</div>
 					</div>
 					<div class="col-lg-2">
-						<p>
-							<a href="/video/editVideo/{{id}}" class="card-link mb-2">
-								<i class="fas fa-pencil-alt"></i>
-								Edit
-							</a>
-						</p>
-						<p>
-							<a href="/video/deleteVideo/{{id}}" class="card-link" data-toggle="confirmation"
-								data-title="Confirm delete?">
-								<i class="far fa-trash-alt"></i>
-								Delete
-							</a>
-						</p>
+						<a href="/video/editVideo/{{id}}" class="btn btn-outline-primary">
+							<i class="fas fa-pencil-alt me-1"></i>
+							Edit
+						</a>
 					</div>
 				</div>
 			</div>
 
-			<div class="accordion" id="storyAccordion">
-				<div class="card-header" id="headingOne">
-					<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne{{id}}"
-						aria-expanded="false" aria-controls="collapseOne{{id}}" style="text-decoration: none;">
-						Story <i class="fas fa-chevron-down"></i>
-					</button>
-				</div>
-				<div id="collapseOne{{id}}" class="collapse" aria-labelledby="headingOne" data-parent="#storyAccordion">
-					<div class="card-body">
-						{{story}}
+			<div class="accordion" id="myAccordion">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+							data-bs-target="#collapseOne{{id}}" aria-expanded="false" aria-controls="collapseOne{{id}}">
+							Story
+						</button>
+					</h2>
+					<div id="collapseOne{{id}}" class="accordion-collapse collapse" aria-labelledby="headingOne"
+						data-bs-parent="#myAccordion">
+						<div class="accordion-body">
+							{{story}}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -80,12 +74,8 @@
 		{{/each}}
 	</div>
 	{{else}}
-	<h3>No videos jotted</h3>
+	<div>
+		No videos jotted
+	</div>
 	{{/if}}
 </div>
-
-<script>
-	$('[data-toggle=confirmation]').confirmation({
-		rootSelector: '[data-toggle=confirmation]',
-	});
-</script>

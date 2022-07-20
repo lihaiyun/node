@@ -4,30 +4,28 @@
 		<form action="" method="post">
 			<div class="row mb-3">
 				<div class="col-lg-9">
-					<div class="form-group">
+					<div class="mb-3">
 						{{!-- Practical 5 Exercise 2: Add a title input text here named 'title'--}}
-						<label class="font-italic" for="title">Title</label>
+						<label class="form-label" for="title">Title</label>
 						<input class="form-control mb-1" id="title" name="title" onblur="initialiseTitle()" />
-						<a href="#" onclick="getOMdbMovie()" tabindex="-1" class="card-link">
+						<a href="#" onclick="getOMdbMovie()" tabindex="-1" class="text-decoration-none">
 							<i class="fas fa-film"></i> Get Open Movie DB Data
 						</a>
 						<span class="text-danger ml-2" id="OMdbErr" style="display:none">Unavailable</span>
 					</div>
-					<div class="form-group">
-						<label class="font-italic" for="story">Story</label>
-						<textarea class="form-control" id="story" name="story" rows="7" maxlength="2000"></textarea>
+					<div class="mb-3">
+						<label class="form-label" for="story">Story</label>
+						<textarea class="form-control" id="story" name="story" rows="9" maxlength="2000"></textarea>
 					</div>
-					<div class="form-group">
-						<label class="font-italic" for="story">Starring</label>
+					<div class="mb-3">
+						<label class="form-label" for="story">Starring</label>
 						<input class="form-control" id="starring" name="starring" />
 					</div>
 				</div>
 				<div class="col-lg-3">
-					<div class="custom-file mb-2">
-						<input type="file" class="custom-file-input" id="posterUpload" name="posterUpload"
-							accept="image/png,image/jpeg,image/jpg,image/gif">
-						<label class="custom-file-label" for="customFile">Choose File</label>
-					</div>
+					<label for="posterUpload" class="form-label">Poster</label>
+					<input class="form-control mb-2" type="file" id="posterUpload" name="posterUpload"
+						accept="image/png,image/jpeg,image/jpg,image/gif">
 					<div class="text-danger small mb-2" id="posterErr" style="display:none"></div>
 					<img id="poster" src="/img/no-image.jpg" alt="Poster" class="border img-thumbnail img-fluid">
 					{{!—- Hidden field to submit URL of poster to the server --}}
@@ -35,101 +33,92 @@
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="row mb-2">
-					<div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
-						<label class="font-italic">Date of release</label>
-						<input id="datepicker" width="200" name="dateRelease" readonly />
+			<div class="row mb-3">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
+					<label class="form-label">Date of release</label>
+					<input id="datepicker" width="200" name="dateRelease" readonly />
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+					<label class="form-label">Language</label>
+					<br>
+					{{!-- Practical 5 Exercise 2: Language radio buttons here named 'language'--}}
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="language" id="langChinese" value="Chinese"
+							onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
+						<label class="form-check-label" for="chinese">Chinese</label>
 					</div>
-					<div class="col-12 col-sm-12 col-md-12 col-lg-6">
-						<label class="font-italic">Language</label>
-						<br>
-						{{!-- Practical 5 Exercise 2: Language radio buttons here named 'language'--}}
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="langChinese"
-								value="Chinese" onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
-							<label class="form-check-label" for="chinese">Chinese</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="langEnglish"
-								value="English" checked
-								onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
-							<label class="form-check-label" for="englishLang">English</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="langMalay" value="Malay"
-								onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
-							<label class="form-check-label" for="malay">Malay</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="langTamil" value="Tamil"
-								onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
-							<label class="form-check-label" for="tamil">Tamil</label>
-						</div>
-						<p class="text-danger m-0" id="languageErr" style="display:none">Please select one language</p>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="language" id="langEnglish" value="English"
+							checked onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
+						<label class="form-check-label" for="englishLang">English</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="language" id="langMalay" value="Malay"
+							onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
+						<label class="form-check-label" for="malay">Malay</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="language" id="langTamil" value="Tamil"
+							onclick="ensureOneCheck('language', 'languageErr', 'btnSubmit')">
+						<label class="form-check-label" for="tamil">Tamil</label>
+					</div>
+					<p class="text-danger m-0" id="languageErr" style="display:none">Please select one language</p>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+					<label class="form-label">Subtitles</label>
+					<br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="subtitles" id="chinese" value="Chinese">
+						<label class="form-check-label" for="chinese">Chinese</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="subtitles" id="english" value="English">
+						<label class="form-check-label" for="englishLang">English</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="subtitles" id="malay" value="Malay">
+						<label class="form-check-label" for="malay">Malay</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="subtitles" id="tamil" value="Tamil">
+						<label class="form-check-label" for="tamil">Tamil</label>
+					</div>
+				</div>
+
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+					<label class="form-label">Classification</label>
+					<br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="G" value="G" name="classification" checked>
+						<label class="form-check-label" for="G">G</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="PG" value="PG" name="classification">
+						<label class="form-check-label" for="PG">PG</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="PG13" value="PG13" name="classification">
+						<label class="form-check-label" for="PG13">PG13</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="NC16" value="NC16" name="classification">
+						<label class="form-check-label" for="NC16">NC16</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="M18" value="M18" name="classification">
+						<label class="form-check-label" for="M18">M18</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="R21" value="R21" name="classification">
+						<label class="form-check-label" for="R21">R21</label>
 					</div>
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="row">
-					<div class="col-12 col-sm-12 col-md-6 col-lg-6">
-						<label class="font-italic">Subtitles</label>
-						<br>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="chinese"
-								value="Chinese">
-							<label class="form-check-label" for="chinese">Chinese</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="english"
-								value="English">
-							<label class="form-check-label" for="englishLang">English</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="malay" value="Malay">
-							<label class="form-check-label" for="malay">Malay</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="tamil" value="Tamil">
-							<label class="form-check-label" for="tamil">Tamil</label>
-						</div>
-					</div>
-
-					<div class="col-12 col-sm-12 col-md-6 col-lg-6">
-						<label class="font-italic">Classification</label>
-						<br>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" id="G" value="G" name="classification" checked>
-							<label class="form-check-label" for="G">G</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" id="PG" value="PG" name="classification">
-							<label class="form-check-label" for="PG">PG</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" id="PG13" value="PG13" name="classification">
-							<label class="form-check-label" for="PG13">PG13</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" id="NC16" value="NC16" name="classification">
-							<label class="form-check-label" for="NC16">NC16</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" id="M18" value="M18" name="classification">
-							<label class="form-check-label" for="M18">M18</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" id="R21" value="R21" name="classification">
-							<label class="form-check-label" for="R21">R21</label>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<br>
-			<button id="btnSubmit" type="submit" class="btn btn-primary">Save
-			</button>
+			<button id="btnSubmit" type="submit" class="btn btn-primary">Save</button>
 		</form>
 	</div>
 </div>
@@ -137,7 +126,6 @@
 <script>
 	$('#datepicker').datepicker({
 		format: 'dd/mm/yyyy',
-		uiLibrary: 'bootstrap4',
-		value: moment().format('DD/MM/YYYY'),
+		value: moment().format('DD/MM/YYYY')
 	});
 </script>
