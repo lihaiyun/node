@@ -9,31 +9,31 @@
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-2">
+					<div class="col-md-2">
 						<a href="{{posterURL}}" data-title="{{title}}" data-toggle="lightbox">
 							<img src="{{posterURL}}" alt="Poster" class="img-thumbnail img-fluid mb-2"
 								onerror="this.src='/img/no-image.jpg'" style="max-height:160px">
 						</a>
 					</div>
-					<div class="col-lg-8">
+					<div class="col-md-8">
 						<div class="row">
-							<div class="col-sm-12 col-md-12 col-lg-3">
+							<div class="col-sm-12 col-md-6 col-lg-3">
 								<p class="font-italic">Subtitles</p>
 								<p class="text-info">
 									{{replaceCommas subtitles}}
 								</p>
 							</div>
-							<div class="col-sm-12 col-md-12 col-lg-3">
+							<div class="col-sm-12 col-md-6 col-lg-3">
 								<p class="font-italic">Language</p>
 								<p class="text-info">
 									{{replaceCommas language}}
 								</p>
 							</div>
-							<div class="col-sm-12 col-md-12 col-lg-3">
+							<div class="col-sm-12 col-md-6 col-lg-3">
 								<p class="font-italic">Classification</p>
 								<p class="text-info">{{classification}}</p>
 							</div>
-							<div class="col-sm-12 col-md-12 col-lg-3">
+							<div class="col-sm-12 col-md-6 col-lg-3">
 								<p class="font-italic">Date Release</p>
 								<p class="text-info">{{formatDate dateRelease 'DD MMM YYYY'}}</p>
 							</div>
@@ -45,7 +45,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-md-2">
 						<a href="/video/editVideo/{{id}}" class="btn btn-outline-primary">
 							<i class="fas fa-pencil-alt me-1"></i>
 							Edit
